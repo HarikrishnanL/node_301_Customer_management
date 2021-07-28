@@ -1,7 +1,6 @@
 const Customer = require('../models/CustomerModel');
 const Utils = require('../utils/utils');
 const customerCustomMessages = require("../domain/customMessages/customer");
-const customerStatus = require("../domain/enumerations/customerStatus");
 
 exports.getAllCustomer = async (pageSize, pageIndex, sortingKey, sortingPriorty) => {
     try {
@@ -63,6 +62,9 @@ exports.postCustomer = async (body) => {
             return newCustomer;
         }
     } catch (error) {
+        // winston log error 
+        // express - validators 
+
         console.log("error in service file ", error)
         throw error;
     }
@@ -71,7 +73,6 @@ exports.postCustomer = async (body) => {
 exports.deleteCustomer = async (customerId) => {
     try {
         const customer = await Customer.destroy({ where: { "id": customerId } })
-        console.log("customer got deleted in service =========>", customer)
         return true;
 
     } catch (error) {

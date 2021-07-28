@@ -19,8 +19,13 @@ exports.postLoginCustomer = async (req, res) => {
 
 exports.postCustomer = async (req, res) => {
     try {
-        await customerService.postCustomer(req.body);
-        return res.status(201).json({ Message: customerCustomMessages.successMessages.CUSTOMER_CREATED })
+        const customer = await customerService.postCustomer(req.body); 
+        return res.status(201).json(
+            {
+                Message: customerCustomMessages.successMessages.CUSTOMER_CREATED,
+                response: { id: customer.id, name: customer.name }
+            }
+        ) 
 
     } catch (error) {
 
@@ -36,8 +41,7 @@ exports.postCustomer = async (req, res) => {
 
 exports.getSingleCustomer = async (req, res) => {
     try {
-        console.log(req.customerId, "test 2 ")
-        const customerDetails = await customerService.getSingleCustomer(req.customerId);
+        const customerDetails = await customerService.getSingleCustomer(req.params.customerId);
         return res.status(200).json({ Message: customerCustomMessages.successMessages.CUSTOMER_RECORDS_FOUND, Response: customerDetails })
     } catch (error) {
 
@@ -114,8 +118,8 @@ exports.getAllCustomer = async (req, res) => {
         return res.status(302).json(
             {
                 Message: customerCustomMessages.successMessages.CUSTOMER_RECORDS_FOUND,
-                response :customersDetails.response,
-                paginateData:customersDetails.paginateData
+                response: customersDetails.response,
+                paginateData: customersDetails.paginateData
             }
         )
 

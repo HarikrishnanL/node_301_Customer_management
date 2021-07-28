@@ -8,10 +8,13 @@ exports.sessionAuthValidator = async (req, res, next) => {
         if (token) {
             let payload = JwtAuthUtils.decode(token, process.env.kJWTSecret);
             let customer = await Customer.findOne({ where: { email: payload.email } });
+
             if (customer) {
-                req.customerId = customer.id;
-                req.customerEmail = customer.email;
-                req.customerNumber = customer.phoneNumber;
+                 req.user = {
+                     id:customer.id,
+                     email:customer.email,
+                     number:customer.phoneNumber
+                 }
                 return next();
             } else {
                 return res.status(404).json({ message: customerCustomMessages.errorMessages.CUSTOMER_UNAUTHORIZED });

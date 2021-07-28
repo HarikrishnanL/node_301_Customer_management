@@ -2,6 +2,7 @@ const CustomerModel = require("../../models/CustomerModel");
 const db = require("../../config/database");
 
 const dbRelation = (req, res, next) => {
+    
     db
         // .sync({ force: true })
         .sync()
@@ -12,5 +13,5 @@ const dbRelation = (req, res, next) => {
         });
     next();    
 };
-
+// needed rework
 module.exports = dbRelation;

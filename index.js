@@ -6,7 +6,7 @@ require('dotenv').config();
 // import database
 
 const db = require("./src/app/config/database");
-const dbRelation = require('./src/app/domain/service/dbRelation');
+// const dbRelation = require('./src/app/domain/service/dbRelation');
 
 // importing routes
 const Customer = require('./src/app/routes/customer');
@@ -29,7 +29,7 @@ db.authenticate()
         console.log("Database Handshake failed with error :" + error)
     });
 
-app.use(dbRelation)
+// app.use(dbRelation)
 
 
 
