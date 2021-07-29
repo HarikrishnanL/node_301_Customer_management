@@ -19,13 +19,13 @@ exports.postLoginCustomer = async (req, res) => {
 
 exports.postCustomer = async (req, res) => {
     try {
-        const customer = await customerService.postCustomer(req.body); 
+        const customer = await customerService.postCustomer(req.body);
         return res.status(201).json(
             {
                 Message: customerCustomMessages.successMessages.CUSTOMER_CREATED,
                 response: { id: customer.id, name: customer.name }
             }
-        ) 
+        )
 
     } catch (error) {
 
@@ -57,10 +57,9 @@ exports.getSingleCustomer = async (req, res) => {
 
 exports.deleteCustomer = async (req, res) => {
     try {
-        const customerDetails = await customerService.deleteCustomer(req.params.customerId);
-        if (customerService) {
-            return res.status(200).json({ Message: customerCustomMessages.successMessages.CUSTOMER_RECORDS_SUCCESSFULLY_DELETED })
-        }
+        await customerService.deleteCustomer(req.params.customerId);
+        return res.status(200).json({ Message: customerCustomMessages.successMessages.CUSTOMER_RECORDS_SUCCESSFULLY_DELETED })
+
     } catch (error) {
 
         return res.status(417)
@@ -75,7 +74,7 @@ exports.deleteCustomer = async (req, res) => {
 
 exports.updateCustomer = async (req, res) => {
     try {
-        const customerUpdate = await customerService.updateCustomer(req.customerId, req.body);
+        const customerUpdate = await customerService.updateCustomer(req.user.id, req.body);
         if (customerUpdate) {
             return res.status(200).json({ Message: customerCustomMessages.successMessages.CUSTOMER_RECORDS_SUCCESSFULLY_UPDATED })
         }
@@ -92,7 +91,7 @@ exports.updateCustomer = async (req, res) => {
 
 exports.updateCustomerStatus = async (req, res) => {
     try {
-        const customerStatusUpdate = await customerService.updateCustomerStatus(req.customerId, req.body)
+        const customerStatusUpdate = await customerService.updateCustomerStatus(req.user.id, req.body)
         if (customerStatusUpdate) {
             return res.status(200).json({ Message: customerCustomMessages.successMessages.CUSTOMER_STATUS_SUCCESFULLY_UPDATED })
         }

@@ -34,9 +34,11 @@ exports.adminSessionAuthValidator = async (req, res, next) => {
             let payload = JwtAuthUtils.decode(token, process.env.kJWTSecret);
             let customer = await Customer.findOne({ where: { email: payload.email } });
             if (customer && customer.role === 'Admin') {
-                req.customerId = customer.id;
-                req.customerEmail = customer.email;
-                req.customerNumber = customer.phoneNumber;
+                req.user = {
+                    id:customer.id,
+                    email:customer.email,
+                    number:customer.phoneNumber
+                }
                 return next();
 
             } else {
