@@ -1,6 +1,6 @@
 const customerStatus = {
     Active:1,
-    InActive :2
+    InActive :0
 }
 
 module.exports = customerStatus;

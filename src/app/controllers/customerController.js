@@ -10,6 +10,7 @@ exports.postLoginCustomer = async (req, res) => {
         return res.status(201).json({ message: customerCustomMessages.successMessages.LOGIN_SUCCESSFUL, "response": customerTokenDetails })
 
     } catch (error) {
+        
         return res.status(400).json({
             message: customerCustomMessages.errorMessages.CUSTOMER_UNAUTHORIZED,
             error: error
@@ -42,9 +43,9 @@ exports.postCustomer = async (req, res) => {
 exports.getSingleCustomer = async (req, res) => {
     try {
         const customerDetails = await customerService.getSingleCustomer(req.params.customerId);
-        return res.status(200).json({ Message: customerCustomMessages.successMessages.CUSTOMER_RECORDS_FOUND, Response: customerDetails })
+        return res.status(200).json({ Message: customerCustomMessages.successMessages.CUSTOMER_RECORDS_FOUND, response: customerDetails })
     } catch (error) {
-
+        console.log(error,"error ===> from superagent")
         return res.status(406)
             .json(
                 {

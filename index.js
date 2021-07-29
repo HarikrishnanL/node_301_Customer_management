@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors')
 require('dotenv').config();
+const morgan = require('morgan');
 
 // import database
 
@@ -14,6 +15,7 @@ const Customer = require('./src/app/routes/customer');
 
 
 const app = express();
+app.use(morgan("dev"))
 app.use(express.json());
 
 app.set('port', process.env.port);
