@@ -30,8 +30,6 @@ exports.getAllCustomer = async (pageSize, pageIndex, sortingKey, sortingPriorty)
         console.log("error in service file ", error)
         throw error;
     }
-
-
 }
 
 exports.getSingleCustomer = async (customerId) => {
@@ -44,7 +42,6 @@ exports.getSingleCustomer = async (customerId) => {
         }
 
     } catch (error) {
-        console.log("error in service file ", error)
         throw error;
     }
 

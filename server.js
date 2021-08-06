@@ -1,6 +1,6 @@
 require('dotenv').config();
 const app = require("./index");
-const http = require("http");
+// const http = require("http");
 const db = require('./src/app/config/database');
 
 const port = process.env.port || 3000;
